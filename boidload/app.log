@@ -1,0 +1,424 @@
+31395 - 2019-07-09 14:47:45,107 -<module> - INFO -  starting
+
+31395 - 2019-07-09 14:47:45,108 -main - DEBUG -  Entered main method
+
+31395 - 2019-07-09 14:47:45,109 -serve_forever - DEBUG -  Serve_forever reached
+
+31395 - 2019-07-09 14:47:46,113 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:47:47,116 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:47:48,119 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:47:48,631 -on_accept - INFO -  accepted connection from ('127.0.0.1', 34492)
+
+31395 - 2019-07-09 14:47:49,119 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:47:49,120 -serve_forever - INFO -  Num active peers = 1
+
+31395 - 2019-07-09 14:47:50,119 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:47:50,122 -serve_forever - INFO -  Num active peers = 1
+
+31395 - 2019-07-09 14:47:51,119 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:47:51,120 -serve_forever - INFO -  Num active peers = 1
+
+31395 - 2019-07-09 14:47:51,879 -on_accept - INFO -  accepted connection from ('127.0.0.1', 34494)
+
+31395 - 2019-07-09 14:47:52,119 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:47:52,119 -serve_forever - INFO -  Num active peers = 2
+
+31395 - 2019-07-09 14:47:53,119 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:47:53,119 -serve_forever - INFO -  Num active peers = 2
+
+31395 - 2019-07-09 14:47:54,119 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:47:54,121 -serve_forever - INFO -  Num active peers = 2
+
+31395 - 2019-07-09 14:47:54,427 -on_accept - INFO -  accepted connection from ('127.0.0.1', 34496)
+
+31395 - 2019-07-09 14:47:55,119 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:47:55,119 -serve_forever - INFO -  Num active peers = 3
+
+31395 - 2019-07-09 14:47:56,119 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:47:56,120 -serve_forever - INFO -  Num active peers = 3
+
+31395 - 2019-07-09 14:47:56,987 -on_accept - INFO -  accepted connection from ('127.0.0.1', 34498)
+
+31395 - 2019-07-09 14:47:57,119 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:47:57,119 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:47:58,119 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:47:58,119 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:47:59,119 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:47:59,120 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:00,119 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:00,120 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:01,119 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:01,121 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:02,119 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:02,120 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:03,119 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:03,121 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:04,119 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:04,120 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:05,119 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:05,120 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:06,119 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:06,121 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:07,119 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:07,120 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:08,119 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:08,119 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:09,119 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:09,119 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:09,768 -on_read - INFO -  Data received from ('127.0.0.1', 34492): b'Generic response'
+
+31395 - 2019-07-09 14:48:10,119 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:10,120 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:11,119 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:11,120 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:12,120 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:12,123 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:13,119 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:13,120 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:14,120 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:14,121 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:15,119 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:15,121 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:16,119 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:16,120 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:16,267 -on_read - INFO -  Data received from ('127.0.0.1', 34494): b'Generic response'
+
+31395 - 2019-07-09 14:48:17,119 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:17,120 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:18,120 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:18,120 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:19,120 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:19,120 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:20,120 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:20,120 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:21,119 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:21,120 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:22,120 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:22,122 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:22,279 -on_read - INFO -  Data received from ('127.0.0.1', 34498): b'Generic response'
+
+31395 - 2019-07-09 14:48:23,120 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:23,122 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:24,120 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:24,120 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:25,120 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:25,121 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:26,120 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:26,121 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:27,120 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:27,120 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:28,120 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:28,120 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:28,131 -on_read - INFO -  Data received from ('127.0.0.1', 34496): b'Generic response'
+
+31395 - 2019-07-09 14:48:29,120 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:29,122 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:30,120 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:30,121 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:31,120 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:31,122 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:31,940 -on_read - INFO -  Data received from ('127.0.0.1', 34496): b'Generic response'
+
+31395 - 2019-07-09 14:48:32,120 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:32,121 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:33,120 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:33,121 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:34,120 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:34,121 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:35,120 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:35,120 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:36,120 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:36,121 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:36,369 -on_read - INFO -  Data received from ('127.0.0.1', 34494): b'Generic response'
+
+31395 - 2019-07-09 14:48:37,120 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:37,121 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:38,120 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:38,121 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:39,120 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:39,121 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:40,120 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:40,121 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:40,478 -on_read - INFO -  Data received from ('127.0.0.1', 34498): b'Generic response'
+
+31395 - 2019-07-09 14:48:41,120 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:41,121 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:42,123 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:42,124 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:43,123 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:43,125 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:44,123 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:44,124 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:44,485 -on_read - INFO -  Data received from ('127.0.0.1', 34494): b'Generic response'
+
+31395 - 2019-07-09 14:48:45,123 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:45,124 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:46,123 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:46,124 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:46,973 -on_read - INFO -  Data received from ('127.0.0.1', 34496): b'Generic response'
+
+31395 - 2019-07-09 14:48:47,123 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:47,124 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:48,124 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:48,124 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:48,757 -on_read - INFO -  Data received from ('127.0.0.1', 34498): b'Generic response'
+
+31395 - 2019-07-09 14:48:49,123 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:49,124 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:50,123 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:50,124 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:50,575 -on_read - INFO -  Data received from ('127.0.0.1', 34492): b'Generic response'
+
+31395 - 2019-07-09 14:48:51,124 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:51,124 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:52,124 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:52,124 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:53,124 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:53,125 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:54,124 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:54,124 -serve_forever - INFO -  Num active peers = 4
+
+31395 - 2019-07-09 14:48:54,998 -close_connection - INFO -  Closing connection to ('127.0.0.1', 34492)
+
+31395 - 2019-07-09 14:48:55,124 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:55,124 -serve_forever - INFO -  Num active peers = 3
+
+31395 - 2019-07-09 14:48:56,124 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:56,124 -serve_forever - INFO -  Num active peers = 3
+
+31395 - 2019-07-09 14:48:57,124 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:57,124 -serve_forever - INFO -  Num active peers = 3
+
+31395 - 2019-07-09 14:48:58,124 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:58,125 -serve_forever - INFO -  Num active peers = 3
+
+31395 - 2019-07-09 14:48:59,124 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:48:59,124 -serve_forever - INFO -  Num active peers = 3
+
+31395 - 2019-07-09 14:48:59,423 -on_read - INFO -  Data received from ('127.0.0.1', 34494): b'Generic response'
+
+31395 - 2019-07-09 14:49:00,124 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:49:00,124 -serve_forever - INFO -  Num active peers = 3
+
+31395 - 2019-07-09 14:49:01,124 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:49:01,125 -serve_forever - INFO -  Num active peers = 3
+
+31395 - 2019-07-09 14:49:02,124 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:49:02,125 -serve_forever - INFO -  Num active peers = 3
+
+31395 - 2019-07-09 14:49:03,124 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:49:03,125 -serve_forever - INFO -  Num active peers = 3
+
+31395 - 2019-07-09 14:49:03,169 -close_connection - INFO -  Closing connection to ('127.0.0.1', 34494)
+
+31395 - 2019-07-09 14:49:04,124 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:49:04,126 -serve_forever - INFO -  Num active peers = 2
+
+31395 - 2019-07-09 14:49:05,124 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:49:05,125 -serve_forever - INFO -  Num active peers = 2
+
+31395 - 2019-07-09 14:49:06,124 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:49:06,125 -serve_forever - INFO -  Num active peers = 2
+
+31395 - 2019-07-09 14:49:07,074 -close_connection - INFO -  Closing connection to ('127.0.0.1', 34496)
+
+31395 - 2019-07-09 14:49:07,124 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:49:07,125 -serve_forever - INFO -  Num active peers = 1
+
+31395 - 2019-07-09 14:49:08,124 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:49:08,125 -serve_forever - INFO -  Num active peers = 1
+
+31395 - 2019-07-09 14:49:09,124 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:49:09,124 -serve_forever - INFO -  Num active peers = 1
+
+31395 - 2019-07-09 14:49:10,124 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:49:10,125 -serve_forever - INFO -  Num active peers = 1
+
+31395 - 2019-07-09 14:49:11,124 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:49:11,125 -serve_forever - INFO -  Num active peers = 1
+
+31395 - 2019-07-09 14:49:12,124 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:49:12,124 -serve_forever - INFO -  Num active peers = 1
+
+31395 - 2019-07-09 14:49:13,124 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:49:13,125 -serve_forever - INFO -  Num active peers = 1
+
+31395 - 2019-07-09 14:49:13,856 -on_read - INFO -  Data received from ('127.0.0.1', 34498): b'Generic response'
+
+31395 - 2019-07-09 14:49:14,124 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:49:14,124 -serve_forever - INFO -  Num active peers = 1
+
+31395 - 2019-07-09 14:49:15,124 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:49:15,125 -serve_forever - INFO -  Num active peers = 1
+
+31395 - 2019-07-09 14:49:16,124 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:49:16,125 -serve_forever - INFO -  Num active peers = 1
+
+31395 - 2019-07-09 14:49:17,124 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:49:17,125 -serve_forever - INFO -  Num active peers = 1
+
+31395 - 2019-07-09 14:49:17,275 -close_connection - INFO -  Closing connection to ('127.0.0.1', 34498)
+
+31395 - 2019-07-09 14:49:18,280 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:49:19,283 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:49:20,286 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:49:21,290 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:49:22,293 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:49:23,296 -serve_forever - INFO -  Running report ...
+
+31395 - 2019-07-09 14:49:24,299 -serve_forever - INFO -  Running report ...
+
