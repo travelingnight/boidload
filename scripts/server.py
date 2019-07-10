@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """
-	Allan M
-	Program for testing #2
+    Allan Millar
     Server
     Massive credit to
     https://github.com/eliben/python3-samples/blob/3a533b22c97c54de22d9cf950a9a3247739eaddc/async/selectors-async-tcp-server.py

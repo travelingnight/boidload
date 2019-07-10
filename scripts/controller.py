@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-	Allan M
+	Allan Millar
 	Main control program
 """
 

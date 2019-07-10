@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-	Allan M
+	Allan Millar
 	Program for testing
 """
 import sys

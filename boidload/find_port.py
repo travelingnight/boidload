@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
 """
-	Allan M
-	Program for testing
+	Allan Millar
+	Program solely made to find an unused port and return it's number.
 """
 import sys, random, socket
 from contextlib import closing
-from subprocess import Popen, PIPE
 
-def find_socket():
+def find_port():
     # This will only ever be run when the machine has already been
     # captured, and from the machine itself.
     HOST = "localhost"
@@ -30,19 +29,3 @@ def find_socket():
             else:
                 break # The port is closed so break out with this port selected.
     return PORT
-
-def start_server(PORT):
-    Popen(
-        ["python3", "./server.py", "PORT"], 
-        shell=False, 
-        stdout=PIPE, 
-        stderr=PIPE
-        )
-
-def main():
-    PORT = find_socket()
-    start_server(PORT)
-    sys.exit(0)
-
-if __name__ == "__main__":
-    main()

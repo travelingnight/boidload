@@ -1,6 +1,6 @@
 """
     Notes / Temp file
-    Allan M.
+    Allan Millar
 """
 
 def mainUserMenu():
