@@ -26,8 +26,14 @@ with socket.socket(socket.AF_INET,
             print("If block")
             break
         elif (usr_input=="disconnect"):
-            print("Elif block")
+            print("Elif block #1")
             data = "Close connection"
+            socket.sendall(data.encode())
+            data = socket.recv(1024)
+            print("Recieved", repr(data.decode()))
+        elif (usr_input=="shut down"):
+            print("Elif block #2")
+            data = "Shut off server"
             socket.sendall(data.encode())
             data = socket.recv(1024)
             print("Recieved", repr(data.decode()))

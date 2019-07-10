@@ -4,9 +4,7 @@
 	Main control program
 """
 
-import sys
-import curses
-import subprocess
+import sys, curses, subprocess
 
 
 class CursesWindow(object): #Context Wrapper

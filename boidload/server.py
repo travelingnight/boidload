@@ -7,7 +7,9 @@
     https://github.com/eliben/python3-samples/blob/3a533b22c97c54de22d9cf950a9a3247739eaddc/async/selectors-async-tcp-server.py
     From which I constructed this server architecture/program.
 """
-import sys, socket, selectors, errno, logging, time
+import sys, socket, selectors, logging, time, argparse
+
+keep_running = True
 
 class SelectorServer:
     def __init__(self, host, port):
@@ -15,7 +17,7 @@ class SelectorServer:
         # and start listening. The socket is nonblocking.
         self.main_socket = socket.socket()
         self.main_socket.bind((host, port))
-        self.main_socket.listen(3)
+        self.main_socket.listen(20)
         self.main_socket.setblocking(False)
         
         # Initialize a default selector that will handle the events.
@@ -59,6 +61,14 @@ class SelectorServer:
             data = conn.recv(1024)
             if (data.decode() == "Close connection"):
                 self.close_connection(conn)
+            elif (data.decode() == "Shut off server"):
+                peername = conn.getpeername()
+                logging.info("Data received from " + 
+                    "{}: {!r}".format(peername, data)
+                    )
+                data = "Full shutdown"
+                conn.send(data.encode())
+                self.shutdown()
             else:
                 peername = conn.getpeername()
                 logging.info("Data received from " + 
@@ -66,25 +76,30 @@ class SelectorServer:
                     )
                 # Assume for simplicity that send won't block, (I don't know)
                 conn.send(data)
-        except (ConnectionResetError, IOError): # as e:
-            pass#if e.errno == errno.EWOULDBLOCK:
-            #    logging.error("IOError")
+        except (ConnectionResetError, IOError):
+            pass
     
     def close_connection(self, conn):
-        # We can't ask conn for getpeername() here, because the peer may no
-        # longer exist (hung up); instead we use our own mapping of socket
-        # fds to peer names - our socket fd is still open.  
+        # We can't ask conn for getpeername() here, because the peer 
+        # may no longer exist (hung up); instead we use our own mapping
+        # of socket fds to peer names - our socket fd is still open.  
         peername = self.current_peers[conn.fileno()]
         logging.info("Closing connection to {0}".format(peername))
         del self.current_peers[conn.fileno()]
         self.selector.unregister(conn)
         conn.close()
     
+    def shutdown(self):
+        global keep_running
+        keep_running = False
+        self.main_socket.shutdown(socket.SHUT_RDWR)
+        self.main_socket.close()
+    
     def serve_forever(self):
         logging.debug("Serve_forever reached")
         last_report_time = time.time()
         
-        while True:
+        while keep_running:
             # Wait until some registered socket becomes ready. 
             # This will block for 200 ms
             events = self.selector.select(timeout = 0.2)
@@ -103,15 +118,26 @@ class SelectorServer:
                     logging.info("Num active peers = {0}".format(
                         len(self.current_peers)))
                 last_report_time = current_time
+        logging.debug("Flag successfully changed, exiting serve_forever")
 
 def main():
+    
+    parser = argparse.ArgumentParser()
+    parser.add_argument("port", 
+        help = "use the provided number as the port for the server", 
+        type = int
+        )
+    args = parser.parse_args()
+    print (args)
+    
     logging.debug("Entered main method")
     HOST = "localhost" #Simplified for development
-    PORT = 12345 #Simplified for development
+    PORT = args.port
     
     server = SelectorServer(host = HOST, port = PORT)
     server.serve_forever()
     
+    logging.info("Program closing")
     sys.exit(0)
 
 if __name__ == "__main__":
