@@ -127,14 +127,14 @@ def main():
         type = int
         )
     args = parser.parse_args()
-    print (args)
+    #print (args)
     
     logging.debug("Entered main method")
     HOST = "localhost" #Simplified for development
     PORT = args.port
-    TESTPORT = 12345
+    #TESTPORT = 12345
     
-    server = SelectorServer(host = HOST, port = TESTPORT)
+    server = SelectorServer(host = HOST, port = PORT)
     server.serve_forever()
     
     logging.info("Program closing")
@@ -148,5 +148,4 @@ if __name__ == "__main__":
             "%(funcName)s - %(levelname)s -  %(message)s\n"
         )
     logging.info("starting")
-    print ("Here we go")
     main()

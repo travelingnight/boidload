@@ -1,34 +1,20 @@
-#!/usr/bin/env python
- 
-import sys, time
-from subprocess import run, PIPE
+#!/usr/bin/env python3
+"""
+	Allan Millar
+	Server initialization program
+"""
+import sys, os
+from subprocess import Popen, PIPE
+
+# Adding in a path to import boidload, which is one directory up.
 sys.path.insert(0, "../")
-from boidload import Daemon, find_port
- 
-class MyDaemon(Daemon):
-        def run(self):
-            PORT = find_port()
-            print (PORT)
-            run(
-                ["python3", "./server.py", "PORT"], 
-                shell=True, 
-                stdout=PIPE, 
-                stderr=PIPE
-                )
- 
+#import boidload
+from boidload import find_port
+
+def main():
+    PORT = str(find_port())
+    print (PORT)
+    Popen(["./server.py", PORT])
+
 if __name__ == "__main__":
-        daemon = MyDaemon('/tmp/server.pid')
-        if len(sys.argv) == 2:
-                if 'start' == sys.argv[1]:
-                        daemon.start()
-                elif 'stop' == sys.argv[1]:
-                        daemon.stop()
-                elif 'restart' == sys.argv[1]:
-                        daemon.restart()
-                else:
-                        print ("Unknown command")
-                        sys.exit(2)
-                sys.exit(0)
-        else:
-                print ("usage: %s start|stop|restart" % sys.argv[0])
-                sys.exit(2)
+    main()
