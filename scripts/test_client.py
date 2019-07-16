@@ -9,15 +9,16 @@ import sys
 import socket
 import time
 
-#command = str(sys.argv[1])
+PORT = int(sys.argv[1])
 
 host = "127.0.0.1"
 
+print(PORT)
 
 with socket.socket(socket.AF_INET, 
     socket.SOCK_STREAM
     ) as socket:
-    socket.connect((host, 12345))
+    socket.connect((host, PORT))
 
     while True:
         time.sleep(1)
