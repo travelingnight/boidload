@@ -37,13 +37,3 @@ def mainUserMenu():
         curses.endwin()
 
 
-sshBook={} #The dictionary every computer will have storing
-                     # the stuff necessary to open all of it's connections
-                     # with both the 
-def ssh():
-    subprocess.Popen(
-        ["ssh", "aiaasboi@134.129.92.168", "-p", "2097"], 
-        shell=False, 
-        stdout=subprocess.PIPE, 
-        stderr=subprocess.PIPE
-        )
