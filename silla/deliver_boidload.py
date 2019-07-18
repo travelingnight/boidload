@@ -3,10 +3,9 @@
 	Allan Millar
 	Package sending script
 """
-import os
-import tarfile
+import os, tarfile, time
 from pathlib import Path
-from subprocess import Popen
+from subprocess import Popen, PIPE
 """
 def reset(tarinfo):
     tarinfo.uid = tarinfo.gid = 0
@@ -38,23 +37,56 @@ def construct_package():
     p.rename(parent_dir / p.name)
 
 def ssh_connect():
-    proc = subprocess.Popen(
-        ["ssh", "aiaasboi@134.129.92.168", "-p", "2097"],
-        stdout=subprocess.PIPE
+    proc = Popen(
+        ["ssh", "-T", "aiaasboi@134.129.92.168", "-p", "2097"],
+        stdin=PIPE,
+        stdout=PIPE,
+        universal_newlines=True
         )
-    proc2 = subprocess.Popen(
-        "aiaasboi", 
-        stdin=p1.stdout, 
-        stdout=subprocess.PIPE
-        )
-    return proc2
+    proc.stdin.write("aiaasboi\n")
+    return proc
 
-def deliver_startup():
+def deliver_package(proc):
+    proc2 = Popen(
+        ["netcat", "-l", "4444", ">", "prf.tar.gz"], 
+        stdin=proc.stdout, 
+        stdout=PIPE
+        )
+    proc_send_reciever = Popen(
+        ["scp", "-P", "4444", "../prf.tar.gz", "aiaasboi@134.129.92.168"]
+        )
+    time.sleep(3)
+    proc3 = Popen(
+        ["netcat", "-l", "4444", ">", "receiver.py"], 
+        stdin=proc2.stdout, 
+        stdout=PIPE
+        )
+    proc_send_reciever = Popen(
+        ["scp", "-P", "4444", "./receiver.py", "aiaasboi@134.129.92.168"]
+        )
+    return proc3
+
+def initiate(proc):
+    proc2 = Popen(
+        ["python3", "reciever.py"], 
+        stdin=proc.stdout, 
+        )
+
+def disconnect(proc):
+    proc.stdin.write("exit\n")
 
 def main():
+    print ("construct_package")
     construct_package()
+    print ("ssh_connect")
     proc = ssh_connect()
-    deliver_startup(proc)
+    print ("deliver_package")
+    #proc = deliver_package(proc)
+    #time.sleep(3)
+    print ("initiate")
+    #initiate(proc)
+    print ("disconnect")
+    disconnect(proc)
 
 if __name__ == "__main__":
     main()
@@ -64,19 +96,5 @@ if __name__ == "__main__":
 Steps
  - don't name the tar boidload for secrecy
  - tar the three relevant (so far) directories and send to new directory
- - send command to de-tar
- - send command to run start up script
-"""
-
-"""
-sshBook={} #The dictionary every computer will have storing
-                     # the stuff necessary to open all of it's connections
-                     # with both the 
-def ssh():
-    subprocess.Popen(
-        ["ssh", "aiaasboi@134.129.92.168", "-p", "2097"], 
-        shell=False, 
-        stdout=subprocess.PIPE, 
-        stderr=subprocess.PIPE
-        )
+ - send receiver.py and execute
 """
