@@ -35,7 +35,7 @@ class SelectorServer:
         self.selector.register(fileobj = self.main_socket, 
             events = selectors.EVENT_READ | selectors.EVENT_WRITE, 
             data = self.on_accept
-            )
+        )
         
         # Dictionary to keep track of peers. Maps socket file descriptor
         # to a peer name. A file descriptor is a handle used to access
@@ -58,7 +58,7 @@ class SelectorServer:
         self.selector.register(fileobj = conn, 
             events = selectors.EVENT_READ | selectors.EVENT_WRITE, 
             data = self.on_read
-            )
+        )
     
     def on_read(self, conn, mask):
         # This handles peer sockets, and is called when data is being
@@ -72,7 +72,7 @@ class SelectorServer:
                 peername = conn.getpeername()
                 logging.info("Data received from " + 
                     "{}: {!r}".format(peername, data)
-                    )
+                )
                 data = "Full shutdown"
                 conn.send(data.encode())
                 self.shutdown()
@@ -80,7 +80,7 @@ class SelectorServer:
                 peername = conn.getpeername()
                 logging.info("Data received from " + 
                     "{}: {!r}".format(peername, data)
-                    )
+                )
                 # Assume for simplicity that send won't block, (I don't know)
                 conn.send(data)
         except (ConnectionResetError, IOError):
@@ -133,7 +133,7 @@ def main():
     parser.add_argument("port", 
         help = "use the provided number as the port for the server", 
         type = int
-        )
+    )
     args = parser.parse_args()
     #print (args)
     
@@ -154,6 +154,6 @@ if __name__ == "__main__":
         filemode="w", 
         format="%(process)d - %(asctime)s -" + 
             "%(funcName)s - %(levelname)s -  %(message)s\n"
-        )
+    )
     logging.info("starting")
     main()

@@ -22,7 +22,7 @@ def mainUserMenu():
                 subprocess.Popen(
                     ["python3", 
                     "/home/allan/boidload/test2.py"]
-                    )
+                )
             elif userChoice == 2:
                 subprocess.Popen(["bash", "./bashTest.sh", str(555)])
             elif userChoice == 3:

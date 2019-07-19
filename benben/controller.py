@@ -26,7 +26,7 @@ def menuHandling(screen, menuNum):
         "CapNet Management Menu\n", 
         "Activation Menu\n", 
         "Deactivation Menu\n", 
-        ]
+    ]
 
     menuOptionCollection=[
         ["CapNet Management Menu", 
@@ -43,7 +43,7 @@ def menuHandling(screen, menuNum):
         "Extract (Not Implemented)",
         "Offload (Not Implemented)",
         "Back"]
-        ]
+    ]
     
     attributes = {} #Empty dictionary
     #Populating attributes with color combos of font and 
@@ -57,14 +57,14 @@ def menuHandling(screen, menuNum):
         1, 
         curses.COLOR_WHITE, 
         curses.COLOR_BLACK
-        )
+    )
     attributes['normal'] = curses.color_pair(1)
     
     curses.init_pair(
         2, 
         curses.COLOR_BLACK, 
         curses.COLOR_WHITE
-        )
+    )
     attributes['highlighted'] = curses.color_pair(2)
     
     c = 0 #Last character read
@@ -74,7 +74,7 @@ def menuHandling(screen, menuNum):
         screen.addstr(
             menuNameList[menuNum], 
             curses.A_UNDERLINE
-            )
+        )
         for i in range(len(menuOptionCollection[menuNum])):
             if i == option:
                 attr = attributes['highlighted']
