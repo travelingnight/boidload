@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """
 	Allan Millar
-	Package sending script
+	Package sending and initiating script
 """
-import os, tarfile, time
+import os, tarfile, time, pexpect
 from pathlib import Path
-from subprocess import Popen, PIPE
 """
+This method may be necessary to some degree if there are issues with
+permissions, but for nwo it's not necessary.
 def reset(tarinfo):
     tarinfo.uid = tarinfo.gid = 0
     tarinfo.uname = tarinfo.gname = "root"
@@ -18,6 +19,8 @@ we want, so we package only the relevant directories/files. Sending
 more may make the system easier to defend against or analyze.
 """
 def construct_package():
+    """Grabbing the files we want to send and adding them to a compressed tar
+    file. The if simply checks if the tar exists and needs to be replaced."""
     tar_file =  os.path.isfile("../prf.tar.gz")
     if tar_file:
         os.remove("../prf.tar.gz")
@@ -37,56 +40,56 @@ def construct_package():
     p.rename(parent_dir / p.name)
 
 def ssh_connect():
-    proc = Popen(
-        ["ssh", "-T", "aiaasboi@134.129.92.168", "-p", "2097"],
-        stdin=PIPE,
-        stdout=PIPE,
-        universal_newlines=True
-        )
-    proc.stdin.write("aiaasboi\n")
-    return proc
+    """
+    Spawns a pexpect object which in this case is the connection to the VM.
+    The object ssh's into the VM, waits for the password prompt, and passes
+    the password.
+    
+    This will have to dynamically load passwords and api's and stuff, and
+    assuming there ever is automated hacking there may be some redundancy.
+    """
+    ssh = pexpect.spawn("ssh -T aiaasboi@134.129.92.168 -p 2097")
+    ssh.expect("password:", timeout=120)
+    ssh.sendline("aiaasboi")
+    return ssh
 
-def deliver_package(proc):
-    proc2 = Popen(
-        ["netcat", "-l", "4444", ">", "prf.tar.gz"], 
-        stdin=proc.stdout, 
-        stdout=PIPE
-        )
-    proc_send_reciever = Popen(
-        ["scp", "-P", "4444", "../prf.tar.gz", "aiaasboi@134.129.92.168"]
-        )
-    time.sleep(3)
-    proc3 = Popen(
-        ["netcat", "-l", "4444", ">", "receiver.py"], 
-        stdin=proc2.stdout, 
-        stdout=PIPE
-        )
-    proc_send_reciever = Popen(
-        ["scp", "-P", "4444", "./receiver.py", "aiaasboi@134.129.92.168"]
-        )
-    return proc3
+def deliver_package(ssh):
+    """
+    Using the same object tell the VM to expect a file.
+    Start another process on the local machine to send the tar of boidload.
+    Tell the VM to expect another file, this time receiver.py.
+    Using the same process that sent the tar, send the script.
+    
+    Again the machine info will eventually need to be written dynamically.
+    """
+    ssh.sendline("netcat -l 4444 > prf.tar.gz")
+    time.sleep(1)
+    scp = pexpect.spawn("scp -P 4444 ../prf.tar.gz aiaasboi@134.129.92.168")
+    time.sleep(1)
+    ssh.sendline("netcat -l 4444 > receiver.py")
+    time.sleep(1)
+    scp.sendline("scp -P 4444 ./receiver.py aiaasboi@134.129.92.168")
+    return ssh
 
-def initiate(proc):
-    proc2 = Popen(
-        ["python3", "reciever.py"], 
-        stdin=proc.stdout, 
-        )
+def initiate(ssh):
+    """Start receiver.py which should initiate another connection from within
+    boidload."""
+    ssh.sendline("python3 reciever.py")
 
-def disconnect(proc):
-    proc.stdin.write("exit\n")
+def disconnect(ssh):
+    ssh.sendline("exit")
 
 def main():
     print ("construct_package")
     construct_package()
     print ("ssh_connect")
-    proc = ssh_connect()
+    ssh = ssh_connect()
     print ("deliver_package")
-    #proc = deliver_package(proc)
-    #time.sleep(3)
+    ssh = deliver_package(ssh)
     print ("initiate")
-    #initiate(proc)
+    initiate(ssh)
     print ("disconnect")
-    disconnect(proc)
+    disconnect(ssh)
 
 if __name__ == "__main__":
     main()

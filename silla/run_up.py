@@ -3,7 +3,7 @@
 	Allan Millar
 	Server initialization program
 """
-import sys, os
+import sys, os, json
 from subprocess import Popen
 
 # Adding in a path to import boidload, which is one directory up.
