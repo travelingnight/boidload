@@ -47,7 +47,7 @@ def main():
         "port": "2097",
         "password": "aiaasboi"
     }
-    """
+    
     data["vulnerable"]["00:0c:29:f5:f4:1a"] = {
         "username": "aiaasboi",
         "ip_addr": "134.129.92.149",
@@ -61,13 +61,18 @@ def main():
         "port": "2000",
         "password": "aiaasboi"
     }
+    data["vulnerable"]["00:0c:29:d4:87:22"] = {
+        "username": "aiaasboi",
+        "ip_addr": "134.129.92.324",
+        "port": "3454",
+        "password": "aiaasboi"
+    }
     data["secure"]["00:0c:29:d4:87:22"] = {
         "username": "aiaasboi",
         "ip_addr": "134.129.92.324",
         "port": "3454",
         "password": "aiaasboi"
     }
-    """
 
     with open("../resources/index.json", "w") as file:
         json.dump(data, file)
