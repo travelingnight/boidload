@@ -54,13 +54,11 @@ Give an example
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+This software is not intended for live use.
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+This project is exclusively built in python, specifically python 3.
 
 ## Contributing
 
@@ -72,9 +70,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+* **Allan Millar** - *Initial work* -[Boidload](https://github.com/travelingnight/boidload)
 
 ## License
 

