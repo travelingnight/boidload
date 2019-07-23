@@ -54,13 +54,13 @@ class SelectorServer:
         self.current_peers[conn.fileno()] = conn.getpeername()
         
         # Register interest in events specific to the new socket. 
-        # To be handled by on_read.
+        # To be handled by on_interact.
         self.selector.register(fileobj = conn, 
             events = selectors.EVENT_READ | selectors.EVENT_WRITE, 
-            data = self.on_read
+            data = self.on_interact
         )
     
-    def on_read(self, conn, mask):
+    def on_interact(self, conn, mask):
         # This handles peer sockets, and is called when data is being
         # sent or received.
         # This also handles the various messages currently

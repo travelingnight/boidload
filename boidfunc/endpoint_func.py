@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 	Allan Millar
-	Program solely made to find an unused port and return it's number.
+    Various functions related to sockets, ip's, port's etc.
 """
 import sys, random, socket
 from contextlib import closing
@@ -29,3 +29,17 @@ def find_port():
             else:
                 break # The port is closed so break out with this port selected.
     return PORT
+
+def get_ip():
+    #https://stackoverflow.com/questions/166506/finding-local-ip-addresses-using-pythons-stdlib
+    # Where I got this function
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    try:
+        # doesn't even have to be reachable
+        s.connect(('10.255.255.255', 1))
+        IP = s.getsockname()[0]
+    except:
+        IP = '127.0.0.1'
+    finally:
+        s.close()
+    return IP

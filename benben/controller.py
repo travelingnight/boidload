@@ -4,7 +4,12 @@
 	Main control program
 """
 
-import sys, curses, subprocess
+import sys, curses, pexpect
+# Adding in a path to import boidload, which is one directory up.
+sys.path.insert(0, "../")
+#import boidload
+from boidfunc import find_port, get_ip
+from boidfunc import update_profile_self, server_status
 
 
 class CursesWindow(object): #Context Wrapper
@@ -45,7 +50,7 @@ def menuHandling(screen, menuNum):
         "Back"]
     ]
     
-    attributes = {} #Empty dictionary
+    attributes = {}
     #Populating attributes with color combos of font and 
     # background, like highlighting.
     """ initialize color pallet """
@@ -126,18 +131,39 @@ def managementMenu(screen, menuNum):
             break
         else:
             print ("Something is wrong")
-    return True
+    return True #I don't think I need to return true, but I will need to return server
 
 def profileCapNet():
     print ("\nProfile\n")
+    # If profile.json exists and server_running = True,
+    #   send command to profile and profile local machine.
+    # If profile.json exists and server_running = False,
+    #   profile local machine only
+    # If profile.json doesn't exist,
+    #   create profile.json and profile local machine.
     return
 
 def expandCapNet():
     print ("\nExpand\n")
-    return
+    if server_status():
+        server.sendline("expand")
+        #send expand command to server.py, 
+        #which will call deliver_boidload.py.
+    else:
+        PORT = find_port()
+        IP = get_ip()
+        server = pexpect.spawn("python3 ../silla/server.py {}".format(PORT))
+        update_profile_self(PORT, IP)
+        server.expect(pexpect.EOF) # wait for server to finish starting up.
+        server.sendline("expand")
+        # call run_up.py, then send expand command to server.py, 
+        # which will call deliver_boidload.py.
+    return server
 
 def guidedExpandCapNet():
     print ("\nGuided Expand\n")
+    # Go to sub-menu where user can enter values for things like individual
+    # machine, ip group, category, etc.
     return
 
 
@@ -164,28 +190,16 @@ def deactivationMenu(screen, menuNum):
         screen.clear()
         screen.refresh()
         if userChoice == 0:
-            pauseCapNet()
+            pass
         elif userChoice == 1:
-            extractCapNet()
+            pass
         elif userChoice == 2:
-            offloadTaskload()
+            pass
         elif userChoice == 3:
             break
         else:
             print ("Something is wrong")
     return True
-
-def pauseCapNet():
-    print ("\nPause\n")
-    return
-
-def extractCapNet():
-    print ("\nExtract\n")
-    return
-
-def offloadTaskload():
-    print ("\nOffload\n")
-    return
 
 
 def main():
