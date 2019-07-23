@@ -74,8 +74,8 @@ def main():
         "password": "aiaasboi"
     }
 
-    with open("../resources/index.json", "w") as file:
-        json.dump(data, file)
+    with open("../resources/index.json", "w") as index_file:
+        json.dump(data, index_file, indent=4, sort_keys=True)
 
 if __name__ == "__main__":
     main()

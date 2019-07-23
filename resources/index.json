@@ -1,1 +1,39 @@
-{"integrated": {}, "vulnerable": {"00:0c:29:89:3e:34": {"username": "aiaasboi", "ip_addr": "134.129.92.168", "port": "2097", "password": "aiaasboi"}, "00:0c:29:f5:f4:1a": {"username": "aiaasboi", "ip_addr": "134.129.92.149", "port": "22", "password": "aiaasboi2"}, "00:0c:29:17:18:f1": {"username": "aiaasboi", "ip_addr": "134.129.92.292", "port": "2000", "password": "aiaasboi"}, "00:0c:29:d4:87:22": {"username": "aiaasboi", "ip_addr": "134.129.92.324", "port": "3454", "password": "aiaasboi"}}, "secure": {"00:0c:29:d4:87:22": {"username": "aiaasboi", "ip_addr": "134.129.92.324", "port": "3454", "password": "aiaasboi"}}, "dangerous": {}, "unknown": {}}
+{
+    "dangerous": {},
+    "integrated": {},
+    "secure": {
+        "00:0c:29:d4:87:22": {
+            "ip_addr": "134.129.92.324",
+            "password": "aiaasboi",
+            "port": "3454",
+            "username": "aiaasboi"
+        }
+    },
+    "unknown": {},
+    "vulnerable": {
+        "00:0c:29:17:18:f1": {
+            "ip_addr": "134.129.92.292",
+            "password": "aiaasboi",
+            "port": "2000",
+            "username": "aiaasboi"
+        },
+        "00:0c:29:89:3e:34": {
+            "ip_addr": "134.129.92.168",
+            "password": "aiaasboi",
+            "port": "2097",
+            "username": "aiaasboi"
+        },
+        "00:0c:29:d4:87:22": {
+            "ip_addr": "134.129.92.324",
+            "password": "aiaasboi",
+            "port": "3454",
+            "username": "aiaasboi"
+        },
+        "00:0c:29:f5:f4:1a": {
+            "ip_addr": "134.129.92.149",
+            "password": "aiaasboi2",
+            "port": "22",
+            "username": "aiaasboi"
+        }
+    }
+}

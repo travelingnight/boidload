@@ -25,13 +25,11 @@ def main():
     # Delete the tarfile
     os.remove("./prf.tar.gz")
     logging.debug("tar file deleted.")
-    """
-    # Maybe: restructure the files if they aren't extracted correctly.
     
     # Run the client initilization program. client.py, within silla
     Popen(["python3", "prf/silla/client.py"])
     logging.debug("client.py initiated")
-    """
+
     logging.info("end of program.")
     # This program will then be deleted by client.py
     sys.exit(0)
