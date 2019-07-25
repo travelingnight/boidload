@@ -152,7 +152,9 @@ def expandCapNet():
     else:
         PORT = find_port()
         IP = get_ip()
-        server = pexpect.spawn("python3 ../silla/server.py {}".format(PORT))
+        server = pexpect.spawn(
+            "python3 ../silla/server.py {} {}".format(PORT, IP)
+        )
         update_profile_self(PORT, IP)
         server.expect(pexpect.EOF) # wait for server to finish starting up.
         server.sendline("expand")

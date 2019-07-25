@@ -26,21 +26,27 @@ def adjust_profile():
 def launch_client(PORT, IP):
     with socket.socket(socket.AF_INET, 
         socket.SOCK_STREAM
-    ) as socket:
-        socket.connect((IP, PORT))
+    ) as sock:
+        sock.connect((IP, PORT))
         
-        return
+        while True:
+            time.sleep(1)
+            data = sock.recv(1024)
+            print("Recieved", repr(data.decode()))
+            sock.sendall(data.encode())
+        
+    return
         
 
 def main():
     logging.info("adjusting profile.json to reflect local hierarchy")
-    adjust_profile()
+    #adjust_profile()
     
     logging.info("fetching connection info for parent")
     with open("../resources/profile.json", "r") as profile_file:
         data = json.load(profile_file)
-    PORT = data["parent"]["port"]
-    IP = data["parent"]["ip_addr"]
+    PORT = data["self"]["port"]
+    IP = data["self"]["ip_addr"]
     
     logging.info("launching client and connecting to parent server")
     launch_client(PORT, IP)

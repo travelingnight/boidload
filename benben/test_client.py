@@ -11,57 +11,28 @@ import time
 
 PORT = int(sys.argv[1])
 
-host = "127.0.0.1"
+IP = sys.argv[2]
 
-print(PORT)
-
-with socket.socket(socket.AF_INET, 
-    socket.SOCK_STREAM
-    ) as socket:
-    socket.connect((host, PORT))
-
-    while True:
-        time.sleep(1)
-        usr_input = input("Enter the command: ")
-        if (usr_input=="exit"):
-            print("If block")
-            break
-        elif (usr_input=="disconnect"):
-            print("Elif block #1")
-            data = "Close connection"
-            socket.sendall(data.encode())
-            data = socket.recv(1024)
-            print("Recieved", repr(data.decode()))
-        elif (usr_input=="shut down"):
-            print("Elif block #2")
-            data = "Shut off server"
-            socket.sendall(data.encode())
-            data = socket.recv(1024)
-            print("Recieved", repr(data.decode()))
-        else:
-            print("Else block")
-            data = "Generic response"
-            socket.sendall(data.encode())
-            data = socket.recv(1024)
-            print("Recieved", repr(data.decode()))
-"""
-
-for id in range (5):
+def launch_client(PORT, IP):
     with socket.socket(socket.AF_INET, 
         socket.SOCK_STREAM
-        ) as socket:
-        socket.connect((host, 12345))
+    ) as sock:
+        sock.connect((IP, PORT))
         
-        time.sleep(id*5)
-        socket.sendall(command.encode())
-        data = socket.recv(1024)
-        print("Recieved", repr(data.decode()))
+        while True:
+            time.sleep(1)
+            data = sock.recv(1024)
+            if len(data) == 0:
+                break
+            print("Recieved", repr(data.decode()))
+            #sock.sendall(data.encode())
+    return
 
+def main():
 
-    data = "This specific arrangment of letters."
-    socket.sendall(data.encode())
-    data = socket.recv(1024)
-    print("Recieved", repr(data.decode()))
-"""
+    launch_client(PORT, IP)
+    
+    sys.exit(0)
 
-sys.exit(0)
+if __name__ == "__main__":
+    main()

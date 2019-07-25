@@ -1,9 +1,13 @@
 {
     "children": {},
-    "parent": {},
-    "self": {
+    "parent": {
         "ip_addr": "134.129.92.189",
         "port": "65308",
+        "server_running": true
+    },
+    "self": {
+        "ip_addr": "134.129.92.189",
+        "port": 61165,
         "server_running": true
     }
 }
