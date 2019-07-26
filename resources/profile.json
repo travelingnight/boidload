@@ -3,11 +3,11 @@
     "parent": {
         "ip_addr": "134.129.92.189",
         "port": "65308",
-        "server_running": true
+        "server_running": false
     },
     "self": {
         "ip_addr": "134.129.92.189",
-        "port": 61165,
-        "server_running": true
+        "port": 51231,
+        "server_running": false
     }
 }

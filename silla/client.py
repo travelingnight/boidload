@@ -32,8 +32,9 @@ def launch_client(PORT, IP):
         while True:
             time.sleep(1)
             data = sock.recv(1024)
-            print("Recieved", repr(data.decode()))
-            sock.sendall(data.encode())
+            if len(data) == 0:
+                break
+            logging.info("Received {}.",format(repr(data.decode())))
         
     return
         

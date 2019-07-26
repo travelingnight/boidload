@@ -1,0 +1,24 @@
+2019-07-26 16:44:06,477 - <module> - INFO -  starting
+
+2019-07-26 16:44:06,477 - construct_package - INFO -  construct_package
+
+2019-07-26 16:44:06,485 - ssh_connect - INFO -  ssh_connect
+
+2019-07-26 16:44:06,591 - ssh_connect - INFO -  ssh_connect
+
+2019-07-26 16:44:07,871 - deliver_package - INFO -  deliver_package
+
+2019-07-26 16:44:08,776 - initiate - INFO -  initiate
+
+2019-07-26 16:44:08,827 - disconnect - INFO -  disconnect
+
+2019-07-26 16:44:09,315 - ssh_connect - INFO -  ssh_connect
+
+2019-07-26 16:44:09,429 - ssh_connect - INFO -  ssh_connect
+
+2019-07-26 16:44:10,645 - deliver_package - INFO -  deliver_package
+
+2019-07-26 16:44:11,495 - initiate - INFO -  initiate
+
+2019-07-26 16:44:11,546 - disconnect - INFO -  disconnect
+
