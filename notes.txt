@@ -1,0 +1,11 @@
+Some resources that may prove useful for anyone continuing this research.
+
+https://ieeexplore.ieee.org/abstract/document/4595796
+
+file:///home/allan/Downloads/Acyber-physicalgameframeworkforsecureandresilientcontrolofmulti-agentautonomoussystems.pdf
+
+http://www.ewh.ieee.org/soc/ias/pub-dept/two-column.pdf
+
+https://link.springer.com/chapter/10.1007/BFb0018382
+
+https://www.pnas.org/content/pnas/107/17/7640.full.pdf
